@@ -15,11 +15,12 @@ INSTALLED_APPS = (
     ...,
     'zookeeper',
 )
+
 3.incloud the zookeeper URLconf in your project urls.py
 
 urlpatterns = [
     ...,
-    url(r'^zookeeper/', include('zookeeper.urls', namespace='blogsplatform')),
+    url(r'^zookeeper/', include('zookeeper.urls', namespace='zookeeper')),
 ]
 
 4.创建数据库(使用session)
