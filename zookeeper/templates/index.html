@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block container %}
+<div class="row">
+  <div class="col-sm-3">
+    <div class="tree"></div>
+  </div>
+  <div class="col-sm-9">
+    <div class="detail">请选择节点</div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+jQuery(document).ready(function() {
+  var options = {
+    'data': {{ treedata|safe }},
+    'onNodeSelected': function(event, node) {
+        jQuery.post("{% url 'zookeeper:detail' %}", {"path": node.path, "csrfmiddlewaretoken": "{{ csrf_token }}"}, function(result) {
+            jQuery(".detail").html(result);
+});
+
+        return true;
+    },
+    'onNodeUnselected': function(event, node) {
+        jQuery(".detail").html('请选择节点');
+        return true;
+    },
+    showTags: true
+  };
+  var tree = jQuery('.tree').treeview(options);
+
+});
+{% endblock %}

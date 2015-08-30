@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include zookeeper/static *
+recursive-include zookeeper/templates *

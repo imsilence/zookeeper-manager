@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>kafka管理</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-treeview/bootstrap-treeview.min.css' %}"/>
+    <style type="text/css">
+      body {
+        padding-top: 50px;
+      }
+      div.container-fluid {
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Kafka管理</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" method="post" action="{% url 'zookeeper:index' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" placeholder="Kafka服务器地址" class="form-control" name="kafkaserver" value="{{ kafkaserver }}">
+            </div>
+            <button type="submit" class="btn btn-success">连接</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      {% block container %}
+      {% endblock %}
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-treeview/bootstrap-treeview.min.js' %}"></script>
+    <script type="text/javascript">
+      {% block js %}
+      {% endblock %}
+    </script>
+  </body>
+</html>
